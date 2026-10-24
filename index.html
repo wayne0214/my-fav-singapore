@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Little Red Dot — Singapore 1960 → Future</title>
+  <meta name="description" content="An interactive 3D story of Singapore for young people: what happened from the 1960s until today, how the country overcame each challenge, and what comes next." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <!-- 3D island -->
+    <section id="stage" aria-label="3D map of Singapore">
+      <canvas id="scene"></canvas>
+      <div id="labels"></div>
+
+      <header class="brand">
+        <div class="brand__logo">LITTLE<br />RED DOT<span class="brand__dot"></span></div>
+        <div class="brand__sub">
+          <strong>Singapore, 1960 → Future</strong>
+          <span>How a small island made it</span>
+        </div>
+      </header>
+
+      <div class="stage-tools">
+        <div class="tool-group" role="group" aria-label="Time of day">
+          <button class="tool" data-sky="day" aria-pressed="true" title="Day">☀</button>
+          <button class="tool" data-sky="dusk" aria-pressed="false" title="Dusk">🌇</button>
+          <button class="tool" data-sky="night" aria-pressed="false" title="Night">☾</button>
+        </div>
+        <div class="tool-group" role="group" aria-label="View">
+          <button class="tool" id="btn-labels" aria-pressed="true" title="Toggle labels">Labels</button>
+          <button class="tool" id="btn-reset" title="Reset view">Reset view</button>
+          <button class="tool" id="btn-help" title="Help">?</button>
+        </div>
+      </div>
+
+      <nav class="timeline" aria-label="Eras">
+        <button class="timeline__arrow" id="era-prev" aria-label="Previous era">←</button>
+        <div class="timeline__track" id="era-track"></div>
+        <button class="timeline__arrow" id="era-next" aria-label="Next era">→</button>
+        <button class="timeline__play" id="era-play" aria-pressed="false">▶ Play</button>
+      </nav>
+
+      <div class="era-badge" id="era-badge" aria-live="polite">
+        <span class="era-badge__count">01 / 08</span>
+        <span class="era-badge__year">1959 – 1969</span>
+      </div>
+
+      <div class="landmark-card" id="landmark-card" hidden>
+        <button class="landmark-card__close" aria-label="Close">×</button>
+        <div class="landmark-card__kicker">LANDMARK</div>
+        <h3 class="landmark-card__title"></h3>
+        <p class="landmark-card__body"></p>
+      </div>
+    </section>
+
+    <!-- Story panel -->
+    <aside id="panel" aria-live="polite">
+      <div class="panel__inner" id="panel-inner">
+        <div class="panel__kicker">THE STORY</div>
+        <h1 class="panel__headline">Loading…</h1>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Intro overlay -->
+  <div id="intro" class="intro">
+    <div class="intro__card">
+      <div class="intro__kicker"></div>
+      <h2 class="intro__title"></h2>
+      <p class="intro__body"></p>
+      <div class="intro__actions">
+        <button class="btn btn--ghost" id="intro-skip">Skip</button>
+        <button class="btn btn--primary" id="intro-next">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="loader" class="loader"><span>Assembling Singapore…</span></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
